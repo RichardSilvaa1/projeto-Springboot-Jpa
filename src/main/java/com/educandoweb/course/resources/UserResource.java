@@ -17,7 +17,7 @@ public class UserResource {
 	public ResponseEntity<User> findAll() {
 
 		User u1 = new User(1L, "Maria", "Mari@gmail.com", "51993675858", "1234");
-
+		
 		System.out.println("TESTE CONCLUIDO");
 		// retornar a resposta com sucesso
 		return ResponseEntity.ok().body(u1);
