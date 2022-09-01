@@ -1,29 +1,37 @@
 package com.educandoweb.course.entities;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.ArrayList;
 
+import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="usuario")
+@Table(name = "tb_usuario")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	//definicao de auto-encremento de id no banco de dados
+	// definicao de auto-encremento de id no banco de dados
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
 	private String phone;
 	private String password;
+
+	/** anotacao para mapear os pedidos com o nome do atributo do outro lado da
+	 associacao(um para muitos) na classe Order
+	 **/
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<>();
 
 	public User() {
 	}
@@ -80,6 +88,10 @@ public class User implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	// compara o id

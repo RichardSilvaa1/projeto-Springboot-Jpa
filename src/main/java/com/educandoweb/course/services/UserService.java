@@ -16,7 +16,7 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 
-	// funcao que repassa chama para o banco exibir os usuarios
+	// funcao que repassa chamada para o banco exibir os usuarios
 	public List<User> findAll() {
 		return repository.findAll();
 	}
