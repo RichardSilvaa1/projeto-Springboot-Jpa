@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_usuario")
 public class User implements Serializable {
@@ -30,6 +32,7 @@ public class User implements Serializable {
 	/** anotacao para mapear os pedidos com o nome do atributo do outro lado da
 	 associacao(um para muitos) na classe Order
 	 **/
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 
