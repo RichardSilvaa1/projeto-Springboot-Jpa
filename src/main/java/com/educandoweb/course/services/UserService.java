@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 
 //Registrando a Classe como componente do SpringBoot para usar em outra dependencia 
 @Service
@@ -24,7 +25,7 @@ public class UserService {
 	// funcao que pega usuario por ID
 	public User FindById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	// operacao que retorna um usario salvo
@@ -36,7 +37,8 @@ public class UserService {
 	public void delete (Long id) {
 		repository.deleteById(id);
 	}
-	
+
+	// atualiza o usuario do banco 
 	public User update(Long id, User obj) {
 		User entity = repository.getReferenceById(id);
 		updateData(entity,obj);
